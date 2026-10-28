@@ -1,0 +1,7 @@
+media: media
+content:
+  - name: website
+    label: Website
+    type: file
+    path: aospicy.html
+    format: code
