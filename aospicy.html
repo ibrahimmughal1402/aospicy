@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>A O Spicy Grill | Karahi, BBQ & Desi Food in Saeedabad, Karachi</title>
+  <meta name="description" content="A O Spicy Grill serves sizzling Karahi, Handi, BBQ, Rice, and Fast Food in Saeedabad, Baldia Town, Karachi. Order online or call now." />
+  <meta name="theme-color" content="#0B0B0B" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="A O Spicy Grill | Sizzling Desi Flavors, Royal Experience" />
+  <meta property="og:description" content="Karachi’s favourite desi grill experience — now a click away. Karahi, BBQ, Handi & more in Baldia Town." />
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&q=80" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Sora:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lottie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+  <style>
+    /* ========== TOKENS ========== */
+    :root {
+      --charcoal: #0B0B0B;
+      --royal: #0F3D2E;
+      --spicy: #FF6B1A;
+      --ember: #D4A017;
+      --cream: #FFF4E6;
+      --smoke: #2A2A2A;
+      --gold-gradient: linear-gradient(135deg, #D4A017 0%, #FFF4E6 45%, #D4A017 100%);
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-ui: 'Sora', sans-serif;
+      --radius: 18px;
+      --container: min(1200px, 92vw);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--charcoal);
+      color: var(--cream);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.no-scroll { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    img { display: block; max-width: 100%; }
+    ::selection { background: var(--spicy); color: #fff; }
+
+    /* ========== UTILITIES ========== */
+    .container { width: var(--container); margin-inline: auto; }
+    .section { padding: clamp(4.5rem, 10vw, 8rem) 0; position: relative; }
+    .eyebrow {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ember);
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--ember); }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+    .lead { font-size: clamp(0.95rem, 1.5vw, 1.08rem); line-height: 1.8; color: #d8cfc3; max-width: 54ch; }
+    .gold-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 0.95rem 1.8rem;
+      border-radius: 999px;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), background 0.3s;
+      will-change: transform;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:active { transform: scale(0.96); }
+    .btn-primary {
+      background: var(--spicy);
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(255, 107, 26, 0.28);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(255, 107, 26, 0.45);
+    }
+    .btn-ghost {
+      border: 1px solid rgba(212, 160, 23, 0.45);
+      color: var(--cream);
+      backdrop-filter: blur(6px);
+    }
+    .btn-ghost:hover {
+      border-color: var(--ember);
+      background: rgba(212, 160, 23, 0.08);
+      transform: translateY(-2px);
+    }
+    .btn-block { width: 100%; }
+
+    /* ========== PRELOADER ========== */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--charcoal);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.4rem;
+      transition: opacity 0.7s ease, visibility 0.7s;
+    }
+    #preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+    .preloader-logo {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      position: relative;
+    }
+    .preloader-flame {
+      width: 34px; height: 34px;
+      background: var(--spicy);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: flicker 1s infinite alternate;
+      filter: blur(0.5px);
+      box-shadow: 0 0 30px rgba(255,107,26,0.7);
+    }
+    @keyframes flicker {
+      0% { transform: scale(0.92) rotate(-4deg); opacity: 0.8; }
+      100% { transform: scale(1.08) rotate(4deg); opacity: 1; }
+    }
+    .preloader-line {
+      width: 160px; height: 2px;
+      background: rgba(255,244,230,0.12);
+      overflow: hidden; border-radius: 2px;
+    }
+    .preloader-line span {
+      display: block; height: 100%; width: 0%;
+      background: var(--gold-gradient);
+      animation: load 1.4s var(--ease-out) forwards;
+    }
+    @keyframes load { to { width: 100%; } }
+
+    /* ========== HEADER ========== */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.1rem 0;
+      transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.scrolled {
+      background: rgba(11, 11, 11, 0.88);
+      backdrop-filter: blur(18px);
+      padding: 0.7rem 0;
+      border-bottom-color: rgba(212, 160, 23, 0.15);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .brand { display: flex; align-items: center; gap: 0.65rem; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.04em; }
+    .brand-icon {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #FFD37A, var(--spicy) 55%, #7a2a00);
+      display: grid; place-items: center;
+      font-size: 0.85rem; color: #1a0d00;
+      box-shadow: 0 0 20px rgba(255,107,26,0.45);
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.6rem; font-family: var(--font-ui); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #e8dfd3; }
+    .nav-links a { position: relative; padding-block: 0.3rem; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--ember); transition: width 0.35s var(--ease-out); }
+    .nav-links a:hover::after { width: 100%; }
+    .header-cta { display: flex; gap: 0.6rem; }
+    .header-cta .btn { padding: 0.7rem 1.2rem; font-size: 0.8rem; }
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; padding: 0.5rem; }
+    .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+
+    /* Mobile nav */
+    .mobile-nav {
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(11,11,11,0.98);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem;
+      transform: translateY(-100%);
+      transition: transform 0.5s var(--ease-out);
+      font-family: var(--font-ui);
+    }
+    .mobile-nav.open { transform: translateY(0); }
+    .mobile-nav a { font-size: 1.4rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative; min-height: 100svh;
+      display: flex; align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: -2;
+      background: url('https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1800&q=85&auto=format') center/cover no-repeat;
+      transform: scale(1.08);
+      will-change: transform;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse at 70% 40%, rgba(255,107,26,0.18), transparent 55%),
+        linear-gradient(180deg, rgba(11,11,11,0.65) 0%, rgba(11,11,11,0.4) 45%, rgba(11,11,11,0.92) 100%);
+    }
+    .hero-smoke {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.35;
+      background: url('https://images.unsplash.com/photo-1528712306091-ed0763094c98?w=1200&q=40&auto=format') center/cover;
+      mix-blend-mode: screen;
+      animation: smokeDrift 22s ease-in-out infinite alternate;
+    }
+    @keyframes smokeDrift {
+      0% { transform: translate3d(-2%, 0, 0) scale(1.1); opacity: 0.25; }
+      100% { transform: translate3d(2%, -2%, 0) scale(1.2); opacity: 0.45; }
+    }
+    .hero-content { position: relative; z-index: 2; padding-top: 6rem; }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(2.6rem, 7vw, 6rem);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      max-width: 14ch;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 .line { display: block; overflow: hidden; }
+    .hero h1 .line span { display: block; transform: translateY(110%); will-change: transform; }
+    .hero-sub {
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      color: #e2d9cd;
+      max-width: 44ch;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+    .hero-meta {
+      margin-top: 3rem;
+      display: flex; flex-wrap: wrap; gap: 1.6rem;
+      font-family: var(--font-ui); font-size: 0.78rem;
+      color: #bfb5a8; letter-spacing: 0.04em;
+    }
+    .hero-meta strong { color: var(--ember); font-weight: 600; }
+
+    /* ========== SIGNATURE DISHES ========== */
+    .dishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.4rem;
+      margin-top: 3rem;
+    }
+    .dish-card {
+      background: linear-gradient(160deg, #161616 0%, #0e0e0e 100%);
+      border: 1px solid rgba(212,160,23,0.12);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.4s;
+      will-change: transform;
+      cursor: pointer;
+      position: relative;
+    }
+    .dish-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212,160,23,0.35);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 40px rgba(255,107,26,0.08);
+    }
+    .dish-media { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+    .dish-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease-out); }
+    .dish-card:hover .dish-media img { transform: scale(1.08); }
+    .dish-badge {
+      position: absolute; top: 0.8rem; left: 0.8rem;
+      background: rgba(11,11,11,0.8); backdrop-filter: blur(6px);
+      border: 1px solid rgba(212,160,23,0.4);
+      color: var(--ember); font-family: var(--font-ui);
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.35rem 0.7rem; border-radius: 999px;
+    }
+    .dish-body { padding: 1.1rem 1.2rem 1.3rem; }
+    .dish-body h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.35rem; }
+    .dish-body p { font-size: 0.82rem; color: #b9b0a4; line-height: 1.6; margin-bottom: 0.8rem; }
+    .dish-foot { display: flex; align-items: center; justify-content: space-between; }
+    .dish-price { font-family: var(--font-ui); font-weight: 700; color: var(--ember); font-size: 0.95rem; }
+    .spice { display: flex; gap: 3px; }
+    .spice i { display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--smoke); }
+    .spice i.on { background: var(--spicy); box-shadow: 0 0 6px rgba(255,107,26,0.6); }
+
+    /* ========== WHY US ========== */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .why-item {
+      padding: 1.8rem 1.4rem;
+      border: 1px solid rgba(255,244,230,0.08);
+      border-radius: var(--radius);
+      background: rgba(42,42,42,0.18);
+      transition: border-color 0.4s, background 0.4s;
+    }
+    .why-item:hover { border-color: rgba(212,160,23,0.3); background: rgba(42,42,42,0.35); }
+    .why-icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(255,107,26,0.1);
+      display: grid; place-items: center;
+      color: var(--spicy); font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .why-item h3 { font-family: var(--font-ui); font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .why-item p { font-size: 0.8rem; color: #a89f93; line-height: 1.6; }
+
+    /* ========== STORY TIMELINE ========== */
+    .story-wrap { display: grid; gap: 1.2rem; margin-top: 3rem; }
+    .story-step {
+      display: grid; grid-template-columns: 80px 1fr; gap: 1.2rem;
+      padding-bottom: 1.2rem; border-bottom: 1px solid rgba(255,244,230,0.07);
+    }
+    .story-step:last-child { border-bottom: 0; }
+    .story-year { font-family: var(--font-display); font-size: 1.1rem; color: var(--ember); }
+    .story-step h3 { font-family: var(--font-ui); font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .story-step p { font-size: 0.82rem; color: #a89f93; line-height: 1.6; }
+
+    /* ========== STATS ========== */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .stat { text-align: center; padding: 1.6rem 0.8rem; border: 1px solid rgba(212,160,23,0.12); border-radius: var(--radius); background: rgba(15,61,46,0.18); }
+    .stat-num { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--ember); line-height: 1; }
+    .stat-label { font-family: var(--font-ui); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #a89f93; margin-top: 0.5rem; }
+
+    /* ========== GALLERY ========== */
+    .gallery-grid { columns: 2; column-gap: 0.8rem; margin-top: 3rem; }
+    .gallery-grid figure { break-inside: avoid; margin-bottom: 0.8rem; border-radius: 12px; overflow: hidden; position: relative; }
+    .gallery-grid img { width: 100%; transition: transform 0.7s var(--ease-out), filter 0.7s; }
+    .gallery-grid figure:hover img { transform: scale(1.04); filter: brightness(1.1); }
+    .gallery-grid figcaption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1rem; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      font-family: var(--font-ui); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .gallery-grid figure:hover figcaption { opacity: 1; }
+
+    /* ========== REVIEWS ========== */
+    .review-card {
+      background: linear-gradient(160deg, #151515, #0d0d0d);
+      border: 1px solid rgba(212,160,23,0.12);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      height: 100%;
+    }
+    .stars { color: var(--ember); letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 0.7rem; }
+    .review-card p { font-size: 0.88rem; line-height: 1.7; color: #cfc6b9; font-style: italic; margin-bottom: 1rem; }
+    .review-author { font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ember); }
+    .rating-summary { display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .rating-big { font-family: var(--font-display); font-size: 3.2rem; color: var(--ember); line-height: 1; }
+
+    /* ========== ORDER / CONTACT ========== */
+    .order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
+    .order-card {
+      background: linear-gradient(160deg, #121212, #0a0a0a);
+      border: 1px solid rgba(212,160,23,0.14);
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      display: flex; flex-direction: column; gap: 0.9rem;
+    }
+    .order-card h3 { font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 0.2rem; }
+    .order-card p { font-size: 0.82rem; color: #a89f93; line-height: 1.6; margin-bottom: 0.6rem; }
+
+    .field { position: relative; margin-bottom: 1.2rem; }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      background: rgba(255,244,230,0.04);
+      border: 1px solid rgba(255,244,230,0.12);
+      border-radius: 10px;
+      padding: 1.1rem 1rem 0.55rem;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .field textarea { min-height: 100px; resize: vertical; }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--spicy);
+      box-shadow: 0 0 0 3px rgba(255,107,26,0.12);
+    }
+    .field label {
+      position: absolute; left: 1rem; top: 0.9rem;
+      font-size: 0.82rem; color: #8f867b;
+      pointer-events: none;
+      transition: transform 0.25s var(--ease-out), font-size 0.25s, color 0.25s;
+      transform-origin: left top;
+    }
+    .field input:focus + label,
+    .field input:not(:placeholder-shown) + label,
+    .field textarea:focus + label,
+    .field textarea:not(:placeholder-shown) + label,
+    .field select:focus + label,
+    .field select:valid + label {
+      transform: translateY(-0.55rem) scale(0.78);
+      color: var(--spicy);
+    }
+
+    .map-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(212,160,23,0.15); aspect-ratio: 16/10; background: #111; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.4) invert(0.9) hue-rotate(160deg) contrast(0.9); }
+
+    /* ========== FOOTER ========== */
+    .site-footer { border-top: 1px solid rgba(212,160,23,0.12); padding: 3rem 0 2rem; background: #070707; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2rem; }
+    .footer-brand p { font-size: 0.82rem; color: #8f867b; line-height: 1.7; margin-top: 0.8rem; max-width: 34ch; }
+    .footer-col h4 { font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ember); margin-bottom: 1rem; }
+    .footer-col a, .footer-col p { display: block; font-size: 0.82rem; color: #a89f93; margin-bottom: 0.55rem; line-height: 1.6; }
+    .footer-col a:hover { color: var(--cream); }
+    .footer-bottom { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,244,230,0.06); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.8rem; font-size: 0.72rem; color: #6e665d; }
+
+    /* ========== FLOATING MOBILE BAR ========== */
+    .mobile-order-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+      display: none;
+      gap: 0.6rem;
+      padding: 0.75rem 0.9rem calc(0.75rem + env(safe-area-inset-bottom));
+      background: rgba(11,11,11,0.92);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(212,160,23,0.18);
+    }
+    .mobile-order-bar .btn { flex: 1; padding: 0.85rem 0.5rem; font-size: 0.8rem; }
+    .mobile-order-bar .btn-primary { animation: gentlePulse 3.5s infinite; }
+    @keyframes gentlePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,26,0.35); }
+      50% { box-shadow: 0 0 0 8px rgba(255,107,26,0); }
+    }
+
+    /* ========== BACK TO TOP ========== */
+    .back-top {
+      position: fixed; right: 1.2rem; bottom: 5.5rem; z-index: 800;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(11,11,11,0.8); border: 1px solid rgba(212,160,23,0.3);
+      backdrop-filter: blur(8px);
+      display: grid; place-items: center;
+      color: var(--ember); font-size: 1rem;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s, transform 0.35s;
+    }
+    .back-top.show { opacity: 1; visibility: visible; }
+    .back-top:hover { transform: translateY(-3px); border-color: var(--spicy); }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+      display: grid; place-items: center;
+      padding: 1.2rem;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal {
+      background: #111; border: 1px solid rgba(212,160,23,0.2);
+      border-radius: var(--radius);
+      max-width: 480px; width: 100%;
+      padding: 1.8rem;
+      transform: scale(0.92) translateY(10px);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+    .modal h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .modal p { font-size: 0.86rem; color: #b9b0a4; line-height: 1.7; margin-bottom: 1.2rem; }
+    .modal-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .modal-close { position: absolute; top: 0.8rem; right: 0.9rem; color: #8f867b; font-size: 1.2rem; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .nav-links, .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .order-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { columns: 2; }
+    }
+    @media (max-width: 640px) {
+      .mobile-order-bar { display: flex; }
+      .back-top { bottom: 6rem; }
+      .gallery-grid { columns: 1; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-meta { gap: 1rem; }
+      .dishes-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ========== REDUCED MOTION ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-bg { transform: none; }
+      .hero-smoke { display: none; }
+      .preloader-line span { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-flame"></div>
+    <div class="preloader-logo">A O SPICY GRILL</div>
+    <div class="preloader-line"><span></span></div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
+        <span class="brand-icon">🔥</span>
+        <span>A O Spicy Grill</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-cta">
+        <a href="tel:+923111661666" class="btn btn-ghost">Call Now</a>
+        <a href="#order" class="btn btn-primary">Order Online</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#menu">Menu</a>
+    <a href="#story">Our Story</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#order" class="btn btn-primary" style="font-size:1rem; padding:0.9rem 2rem;">Order Now</a>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <div class="hero-bg" id="heroBg" role="img" aria-label="Sizzling BBQ grill at A O Spicy Grill"></div>
+    <div class="hero-smoke"></div>
+    <div class="container hero-content">
+      <p class="eyebrow">Sizzling Desi Flavors · Royal Experience</p>
+      <h1>
+        <span class="line"><span>Sizzling Karahi.</span></span>
+        <span class="line"><span>Smoky BBQ.</span></span>
+        <span class="line"><span class="gold-text">Royal Taste.</span></span>
+      </h1>
+      <p class="hero-sub">
+        Karachi’s favourite desi grill experience — now a click away. Karahi, Handi, BBQ, White Curry Rice and family platters, grilled fresh in Saeedabad, Baldia Town.
+      </p>
+      <div class="hero-actions">
+        <a href="#order" class="btn btn-primary" style="padding:1rem 2.2rem; font-size:0.95rem;">Order Online</a>
+        <a href="tel:+923111661666" class="btn btn-ghost" style="padding:1rem 2.2rem; font-size:0.95rem;">Call Now</a>
+      </div>
+      <div class="hero-meta">
+        <span><strong>4.2 ★</strong> · 1,144 Google reviews</span>
+        <span>Open daily <strong>12:00 – 02:00</strong></span>
+        <span>Baldia Town, Karachi</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SIGNATURE DISHES ========== -->
+  <section class="section" id="menu">
+    <div class="container">
+      <p class="eyebrow">Signature Selection</p>
+      <h2>Dishes that made us <span class="gold-text">famous</span>.</h2>
+      <p class="lead" style="margin-top:0.8rem;">From the wok to the grill — every plate is fired fresh, seasoned boldly, and served with royal generosity.</p>
+
+      <div class="dishes-grid">
+        <!-- Dish 1 -->
+        <article class="dish-card" data-dish="Chicken Karahi" data-price="Rs. 1,450 (Full)" data-desc="Slow-cooked chicken in a fiery tomato and green-chilli karahi, finished with ginger juliennes and fresh coriander." data-spice="3">
+          <div class="dish-media">
+            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80&auto=format" alt="Steaming chicken karahi in a black wok" loading="lazy" />
+            <span class="dish-badge">Best Seller</span>
+          </div>
+          <div class="dish-body">
+            <h3>Chicken Karahi</h3>
+            <p>Tomato, green chilli, ginger — the Karachi classic.</p>
+            <div class="dish-foot"><span class="dish-price">Rs. 1,450</span><span class="spice"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          </div>
+        </article>
+        <!-- Dish 2 -->
+        <article class="dish-card" data-dish="Chicken Mukhani Handi" data-price="Rs. 1,550 (Full)" data-desc="Buttery, creamy handi with a gentle makhani finish — rich, aromatic, and perfect with naan." data-spice="2">
+          <div class="dish-media">
+            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80&auto=format" alt="Creamy chicken handi garnished with coriander" loading="lazy" />
+            <span class="dish-badge">Chef’s Special</span>
+          </div>
+          <div class="dish-body">
+            <h3>Chicken Mukhani Handi</h3>
+            <p>Silky makhani gravy, tender chicken, slow handi finish.</p>
+            <div class="dish-foot"><span class="dish-price">Rs. 1,550</span><span class="spice"><i class="on"></i><i class="on"></i><i></i></span></div>
+          </div>
+        </article>
+        <!-- Dish 3 -->
+        <article class="dish-card" data-dish="BBQ Platter" data-price="Rs. 1,890" data-desc="Seekh kebab, malai boti, chicken tikka and grilled vegetables — a smoky feast for sharing." data-spice="2">
+          <div class="dish-media">
+            <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&q=80&auto=format" alt="Mixed BBQ platter with seekh kebabs and grilled chicken" loading="lazy" />
+            <span class="dish-badge">Family Favourite</span>
+          </div>
+          <div class="dish-body">
+            <h3>BBQ Platter</h3>
+            <p>Seekh, boti, tikka — grilled over live coals.</p>
+            <div class="dish-foot"><span class="dish-price">Rs. 1,890</span><span class="spice"><i class="on"></i><i class="on"></i><i></i></span></div>
+          </div>
+        </article>
+        <!-- Dish 4 -->
+        <article class="dish-card" data-dish="White Curry Rice" data-price="Rs. 650" data-desc="Our signature: mild, creamy white curry served over fragrant rice — a cult favourite in Baldia." data-spice="1">
+          <div class="dish-media">
+            <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80&auto=format" alt="White curry rice bowl with creamy sauce" loading="lazy" />
+            <span class="dish-badge">Signature</span>
+          </div>
+          <div class="dish-body">
+            <h3>White Curry Rice</h3>
+            <p>The dish people drive across Karachi for.</p>
+            <div class="dish-foot"><span class="dish-price">Rs. 650</span><span class="spice"><i class="on"></i><i></i><i></i></span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY US ========== -->
+  <section class="section" style="background:rgba(15,61,46,0.08);">
+    <div class="container">
+      <p class="eyebrow">The A O Difference</p>
+      <h2>Why families keep <span class="gold-text">coming back</span>.</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">🌿</div>
+          <h3>Fresh Ingredients</h3>
+          <p>Daily-sourced produce, whole spices, and fresh meat — no shortcuts.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🔥</div>
+          <h3>Live Grill</h3>
+          <p>Watch your kebabs and tikka hit the coals, just the way Karachi loves it.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">👨‍👩‍👧‍👦</div>
+          <h3>Family Atmosphere</h3>
+          <p>Comfortable seating, generous platters, and a welcoming vibe for all ages.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛵</div>
+          <h3>Fast Delivery</h3>
+          <p>Hot, sealed, and on time across Baldia, Saeedabad, and nearby areas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== OUR STORY ========== -->
+  <section class="section" id="story">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;" class="story-layout">
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h2>From a Baldia grill to a <span class="gold-text">Baldia institution</span>.</h2>
+          <p class="lead" style="margin-top:1rem;">A O Spicy Grill began with one belief: that bold desi flavour deserves a royal setting. Today, 1,144 Google reviews and a 4.2-star rating later, we still fire every karahi and every seekh the same way — with patience, smoke, and heart.</p>
+          <div class="stats-grid">
+            <div class="stat"><div class="stat-num" data-count="12">0</div><div class="stat-label">Years of Serving</div></div>
+            <div class="stat"><div class="stat-num" data-count="1144">0</div><div class="stat-label">Google Reviews</div></div>
+            <div class="stat"><div class="stat-num" data-count="4.2" data-decimal="1">0</div><div class="stat-label">Star Rating</div></div>
+            <div class="stat"><div class="stat-num" data-count="30">0</div><div class="stat-label">Signature Dishes</div></div>
+          </div>
+        </div>
+        <div class="story-wrap">
+          <div class="story-step"><div class="story-year">2012</div><div><h3>The first flame</h3><p>A small grill opens in Sector 5G, Saeedabad — serving seekh kebabs and karahi to the neighbourhood.</p></div></div>
+          <div class="story-step"><div class="story-year">2016</div><div><h3>White Curry Rice becomes a cult favourite</h3><p>Word spreads across Baldia. Families start driving in from nearby areas for the creamy, mild signature.</p></div></div>
+          <div class="story-step"><div class="story-year">2020</div><div><h3>Delivery & family platters</h3><p>We launch party orders and delivery, bringing the sizzle home to thousands of Karachi households.</p></div></div>
+          <div class="story-step"><div class="story-year">Today</div><div><h3>4.2 ★ and still grilling</h3><p>Open daily until 2 AM, serving Karahi, Handi, BBQ, Rice, Fast Food, and family deals to a city that loves flavour.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY ========== -->
+  <section class="section" id="gallery" style="background:rgba(15,61,46,0.06);">
+    <div class="container">
+      <p class="eyebrow">The Experience</p>
+      <h2>Feast your <span class="gold-text">eyes</span>.</h2>
+      <div class="gallery-grid">
+        <figure><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&q=80&auto=format" alt="Sizzling seekh kebabs on a grill" loading="lazy" /><figcaption>Live Grill</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80&auto=format" alt="Chicken karahi with steam rising" loading="lazy" /><figcaption>Karahi</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80&auto=format" alt="Creamy handi served in a traditional pot" loading="lazy" /><figcaption>Handi</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&q=80&auto=format" alt="BBQ platter with grilled meats and naan" loading="lazy" /><figcaption>BBQ Platter</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80&auto=format" alt="White curry rice bowl" loading="lazy" /><figcaption>White Curry Rice</figcaption></figure>
+        <figure><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80&auto=format" alt="Warm restaurant interior with family dining" loading="lazy" /><figcaption>Family Dining</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REVIEWS ========== -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <p class="eyebrow">What Karachi Says</p>
+      <h2>Loved by <span class="gold-text">1,100+</span> guests.</h2>
+      <div class="rating-summary">
+        <div class="rating-big">4.2</div>
+        <div>
+          <div class="stars" aria-label="4.2 out of 5 stars">★★★★☆</div>
+          <p style="font-size:0.8rem; color:#a89f93; margin-top:0.3rem;">Based on 1,144 Google reviews</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem;">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>“The White Curry Rice is their speciality, and the savoury BBQ offered a genuinely delightful flavour. Service was top-notch and prices reasonable.”</p>
+          <div class="review-author">Ali Ahmad HaYat · Google</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>“Try the Chicken Mukhani Handi and Chicken Mayo Garlic Roll — best restaurant located in Sector 5G, Saeedabad, Baldia Town.”</p>
+          <div class="review-author">Rehan Ali · Foursquare</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★☆</div>
+          <p>“A proper Karachi grill house. The karahi and seekh kebabs are smoky, juicy, and full of flavour. Perfect for family dinners.”</p>
+          <div class="review-author">Verified diner · Google</div>
+        </div>
+      </div>
+      <div style="margin-top:2rem;">
+        <a href="https://maps.app.goo.gl/FXbnSCQPU9bbae4a7" target="_blank" rel="noopener" class="btn btn-ghost">Leave a Review on Google</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ORDER / CONTACT ========== -->
+  <section class="section" id="order" style="background:rgba(15,61,46,0.08);">
+    <div class="container">
+      <p class="eyebrow">Order & Reserve</p>
+      <h2>Your table — or your <span class="gold-text">delivery</span> — is ready.</h2>
+      <div class="order-grid">
+        <div class="order-card">
+          <h3>Order Online</h3>
+          <p>Choose your preferred way to get the sizzle home.</p>
+          <a href="#" id="foodpandaLink" class="btn btn-primary btn-block" target="_blank" rel="noopener" aria-disabled="true" style="opacity:0.6; pointer-events:none;">Order on Foodpanda (link coming soon)</a>
+          <a href="https://wa.me/923111661666?text=Assalam%20o%20Alaikum%2C%20I%20want%20to%20order%20from%20A%20O%20Spicy%20Grill.%20Please%20share%20the%20menu%20and%20delivery%20details." class="btn btn-ghost btn-block" target="_blank" rel="noopener">WhatsApp Order</a>
+          <a href="tel:+923111661666" class="btn btn-ghost btn-block">Call: 0311-1661666</a>
+          <p style="font-size:0.75rem; margin-top:0.6rem;">Delivery areas: Baldia Town, Saeedabad, and nearby Karachi areas. Open daily 12:00 – 02:00.</p>
+        </div>
+        <div class="order-card">
+          <h3>Reserve a Table</h3>
+          <p>Tell us when you’re coming — we’ll keep the grill hot.</p>
+          <form id="reservationForm" novalidate>
+            <div class="field"><input type="text" id="resName" placeholder=" " required /><label for="resName">Your name</label></div>
+            <div class="field"><input type="tel" id="resPhone" placeholder=" " required /><label for="resPhone">Phone number</label></div>
+            <div class="field"><input type="date" id="resDate" placeholder=" " required /><label for="resDate" style="top:0.35rem; font-size:0.7rem; transform:none; color:var(--spicy);">Date</label></div>
+            <div class="field"><input type="number" id="resGuests" min="1" max="20" placeholder=" " required /><label for="resGuests">Guests</label></div>
+            <button type="submit" class="btn btn-primary btn-block">Request Reservation</button>
+            <p id="resSuccess" style="display:none; color:var(--ember); font-size:0.8rem; margin-top:0.6rem;">Shukriya! We’ll confirm your table by phone shortly.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FIND US ========== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <p class="eyebrow">Find Us</p>
+      <h2>Come for the <span class="gold-text">smoke</span>.</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2.5rem;" class="contact-grid">
+        <div>
+          <div class="order-card" style="margin-bottom:1rem;">
+            <h3 style="font-size:1.1rem;">A O Spicy Grill</h3>
+            <p style="margin-bottom:0.4rem;">Main 24 Market Road, Sector 5G, Baldia Town, Karachi 75760</p>
+            <p style="margin-bottom:0.4rem;">Near Police Training Centre, Saeedabad</p>
+            <p><strong style="color:var(--ember);">Open daily:</strong> 12:00 – 02:00 · Friday from 14:00</p>
+            <p><strong style="color:var(--ember);">Phone:</strong> <a href="tel:+923111661666" style="color:var(--cream);">0311-1661666</a> · <a href="tel:+923222565415" style="color:var(--cream);">0322-2565415</a></p>
+            <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1rem;">
+              <a href="https://maps.app.goo.gl/FXbnSCQPU9bbae4a7" target="_blank" rel="noopener" class="btn btn-primary" style="padding:0.75rem 1.2rem; font-size:0.8rem;">Get Directions</a>
+              <a href="https://wa.me/923111661666" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:0.75rem 1.2rem; font-size:0.8rem;">WhatsApp Us</a>
+            </div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps?q=A+O+Spicy+Grill+Saeedabad+Baldia+Town+Karachi&output=embed" title="A O Spicy Grill location on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand" style="margin-bottom:0.4rem;">
+            <span class="brand-icon">🔥</span>
+            <span>A O Spicy Grill</span>
+          </div>
+          <p>Sizzling Desi Flavors, Royal Experience. Serving Karahi, Handi, BBQ, Rice, and Fast Food in Saeedabad, Baldia Town, Karachi.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#menu">Menu</a>
+          <a href="#story">Our Story</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>Main 24 Market Road, Sector 5G, Baldia Town, Karachi</p>
+          <a href="tel:+923111661666">0311-1661666</a>
+          <a href="https://wa.me/923111661666" target="_blank" rel="noopener">WhatsApp</a>
+          <p style="margin-top:0.5rem;">Open daily 12:00 – 02:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> A O Spicy Grill. All rights reserved.</span>
+        <span>Baldia Town · Saeedabad · Karachi</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== FLOATING MOBILE ORDER BAR ========== -->
+  <div class="mobile-order-bar" role="complementary" aria-label="Quick order actions">
+    <a href="tel:+923111661666" class="btn btn-ghost">Call Now</a>
+    <a href="#order" class="btn btn-primary">Order Online</a>
+  </div>
+
+  <!-- ========== BACK TO TOP ========== -->
+  <button class="back-top" id="backTop" aria-label="Back to top">🔥</button>
+
+  <!-- ========== DISH MODAL ========== -->
+  <div class="modal-overlay" id="dishModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal" style="position:relative;">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <p><strong style="color:var(--ember);">Price:</strong> <span id="modalPrice"></span> &nbsp;·&nbsp; <strong style="color:var(--ember);">Spice:</strong> <span id="modalSpice"></span></p>
+      <div class="modal-actions">
+        <a href="https://wa.me/923111661666?text=Assalam%20o%20Alaikum%2C%20I%20want%20to%20order%20from%20A%20O%20Spicy%20Grill." target="_blank" rel="noopener" class="btn btn-primary" style="flex:1;">WhatsApp Order</a>
+        <a href="tel:+923111661666" class="btn btn-ghost" style="flex:1;">Call to Order</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SCHEMA MARKUP ========== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "A O Spicy Grill",
+    "alternateName": "New Ao Spicy Grill",
+    "image": "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&q=80",
+    "servesCuisine": ["Pakistani", "BBQ", "Karahi", "Handi", "Fast Food"],
+    "priceRange": "Rs. 500 – Rs. 2,000",
+    "telephone": "+92-311-1661666",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Main 24 Market Road, Sector 5G, Baldia Town",
+      "addressLocality": "Karachi",
+      "addressRegion": "Sindh",
+      "postalCode": "75760",
+      "addressCountry": "PK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 24.9167,
+      "longitude": 66.9833
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Saturday","Sunday"],
+        "opens": "12:00",
+        "closes": "02:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Friday",
+        "opens": "14:00",
+        "closes": "02:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.2",
+      "reviewCount": "1144"
+    },
+    "hasMenu": {
+      "@type": "Menu",
+      "name": "A O Spicy Grill Menu",
+      "hasMenuSection": [
+        { "@type": "MenuSection", "name": "Karahi & Handi" },
+        { "@type": "MenuSection", "name": "BBQ" },
+        { "@type": "MenuSection", "name": "Rice" },
+        { "@type": "MenuSection", "name": "Fast Food" },
+        { "@type": "MenuSection", "name": "Family Deals" }
+      ]
+    },
+    "url": "https://maps.app.goo.gl/FXbnSCQPU9bbae4a7"
+  }
+  </script>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ---------- PRELOADER ---------- */
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          document.getElementById('preloader').classList.add('done');
+        }, 1500);
+      });
+
+      /* ---------- HERO TEXT REVEAL ---------- */
+      gsap.registerPlugin(ScrollTrigger);
+
+      window.addEventListener('load', function () {
+        gsap.to('.hero h1 .line span', {
+          y: 0,
+          duration: 1.1,
+          stagger: 0.14,
+          ease: 'power3.out',
+          delay: 1.6
+        });
+        gsap.from('.hero-sub, .hero-actions, .hero-meta', {
+          opacity: 0,
+          y: 24,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: 'power2.out',
+          delay: 2.1
+        });
+      });
+
+      /* ---------- HEADER SCROLL STATE ---------- */
+      const header = document.getElementById('siteHeader');
+      const backTop = document.getElementById('backTop');
+      window.addEventListener('scroll', function () {
+        const y = window.scrollY;
+        header.classList.toggle('scrolled', y > 60);
+        backTop.classList.toggle('show', y > 600);
+      }, { passive: true });
+
+      backTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* ---------- MOBILE NAV ---------- */
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      menuToggle.addEventListener('click', function () {
+        const isOpen = mobileNav.classList.toggle('open');
+        document.body.classList.toggle('no-scroll', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen);
+      });
+      mobileNav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileNav.classList.remove('open');
+          document.body.classList.remove('no-scroll');
+        });
+      });
+
+      /* ---------- SCROLL REVEALS ---------- */
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches === false) {
+        gsap.utils.toArray('.section h2, .section .lead, .eyebrow').forEach(function (el) {
+          gsap.from(el, {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+          });
+        });
+
+        gsap.utils.toArray('.dish-card, .why-item, .review-card, .stat').forEach(function (el, i) {
+          gsap.from(el, {
+            opacity: 0,
+            y: 28,
+            duration: 0.7,
+            delay: (i % 4) * 0.06,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+          });
+        });
+
+        /* Hero parallax */
+        gsap.to('#heroBg', {
+          yPercent: 12,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+      }
+
+      /* ---------- COUNTER ANIMATION ---------- */
+      document.querySelectorAll('.stat-num').forEach(function (el) {
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimal || '0', 10);
+        const obj = { val: 0 };
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top 90%',
+          once: true,
+          onEnter: function () {
+            gsap.to(obj, {
+              val: target,
+              duration: 1.6,
+              ease: 'power2.out',
+              onUpdate: function () {
+                el.textContent = obj.val.toFixed(decimals);
+              }
+            });
+          }
+        });
+      });
+
+      /* ---------- DISH MODAL ---------- */
+      const modal = document.getElementById('dishModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalPrice = document.getElementById('modalPrice');
+      const modalSpice = document.getElementById('modalSpice');
+
+      document.querySelectorAll('.dish-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          const name = card.dataset.dish;
+          const desc = card.dataset.desc;
+          const price = card.dataset.price;
+          const spice = parseInt(card.dataset.spice, 10);
+          modalTitle.textContent = name;
+          modalDesc.textContent = desc;
+          modalPrice.textContent = price;
+          modalSpice.textContent = '🌶'.repeat(spice) + '·'.repeat(3 - spice);
+          modal.classList.add('open');
+          document.body.classList.add('no-scroll');
+        });
+      });
+
+      document.getElementById('modalClose').addEventListener('click', closeModal);
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+      });
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+
+      /* ---------- RESERVATION FORM ---------- */
+      document.getElementById('reservationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name = document.getElementById('resName').value.trim();
+        const phone = document.getElementById('resPhone').value.trim();
+        const date = document.getElementById('resDate').value;
+        const guests = document.getElementById('resGuests').value;
+        if (!name || !phone || !date || !guests) return;
+        document.getElementById('resSuccess').style.display = 'block';
+        this.reset();
+        setTimeout(function () {
+          document.getElementById('resSuccess').style.display = 'none';
+        }, 6000);
+      });
+
+      /* ---------- YEAR ---------- */
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      /* ---------- FOODPANDA PLACEHOLDER ---------- */
+      // Replace the href below with the real Foodpanda restaurant URL when available.
+      const fp = document.getElementById('foodpandaLink');
+      // fp.href = 'https://www.foodpanda.pk/restaurant/REPLACE-ME';
+      // fp.textContent = 'Order on Foodpanda';
+      // fp.style.opacity = '1';
+      // fp.style.pointerEvents = 'auto';
+      // fp.removeAttribute('aria-disabled');
+
+      /* ---------- GENTLE EMBER PARTICLES (DESKTOP ONLY) ---------- */
+      if (window.matchMedia('(pointer: fine)').matches && window.matchMedia('(prefers-reduced-motion: reduce)').matches === false) {
+        const hero = document.querySelector('.hero');
+        let last = 0;
+        hero.addEventListener('mousemove', function (e) {
+          const now = Date.now();
+          if (now - last < 60) return;
+          last = now;
+          const dot = document.createElement('span');
+          dot.style.cssText =
+            'position:fixed;left:' + e.clientX + 'px;top:' + e.clientY + 'px;width:4px;height:4px;border-radius:50%;background:#FF6B1A;pointer-events:none;z-index:5;opacity:0.9;box-shadow:0 0 6px #FF6B1A;';
+          document.body.appendChild(dot);
+          dot.animate(
+            [
+              { transform: 'translate(0,0) scale(1)', opacity: 0.9 },
+              { transform: 'translate(' + (Math.random() * 40 - 20) + 'px,-' + (30 + Math.random() * 40) + 'px) scale(0)', opacity: 0 }
+            ],
+            { duration: 900 + Math.random() * 400, easing: 'cubic-bezier(0.22,1,0.36,1)' }
+          ).onfinish = function () { dot.remove(); };
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
